@@ -1,0 +1,35 @@
+.tab
+  border: none
+  background-color: var(--grey-50)
+  font-weight: 200
+  padding: 0px 12px
+  transition: background-color .5s, border-bottom .5s
+  width: 200px
+  text-overflow: ellipsis
+  display: flex
+  justify-content: space-between
+  -webkit-app-region: no-drag
+  border-radius: 3px
+  align-items: center
+  &:hover
+    background-color: var(--white)
+    .tab__close
+      opacity: 1
+  &_active
+    background-color: var(--white)
+    border-bottom: 2px solid var(--blue-300)
+  &__close
+    width: 20px
+    height: 20px
+    border: none
+    background-color: transparent
+    display: flex
+    align-items: center
+    justify-content: center
+    border-radius: 50%
+    padding: 0
+    opacity: 0
+    transition: opacity .5s, background-color .5s
+    cursor: pointer
+    &:hover
+      background-color: var(--grey-200)
