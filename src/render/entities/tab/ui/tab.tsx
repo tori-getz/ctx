@@ -1,10 +1,12 @@
 import type { CSSProperties, HTMLAttributes } from "react";
 import { clsx } from 'clsx';
 import cls from './tab.module.sass';
+import { TailSpin } from 'react-loader-spinner';
 import { IoMdClose } from "react-icons/io";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from '@dnd-kit/utilities';
 import { useRef, useState } from 'react';
+import { getCSSVariable } from "~/shared/lib";
 
 interface ITabProps extends HTMLAttributes<HTMLButtonElement> {
   id: string;
@@ -12,6 +14,9 @@ interface ITabProps extends HTMLAttributes<HTMLButtonElement> {
   active?: boolean;
   onClose: () => void;
   onClick: () => void;
+  disableClose: boolean;
+  icon?: string;
+  loading: boolean;
 }
 
 export const Tab: React.FC<ITabProps> = ({
@@ -20,6 +25,9 @@ export const Tab: React.FC<ITabProps> = ({
   active = false,
   onClose,
   onClick,
+  disableClose,
+  icon,
+  loading,
   ...props
 }) => {
   const {
@@ -78,12 +86,32 @@ export const Tab: React.FC<ITabProps> = ({
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
     >
-      {title}
-      <button
-        className={cls.tab__close}
-      >
-        <IoMdClose size={15} />
-      </button>
+      {loading
+        ? (
+          <TailSpin
+            width={16}
+            height={16}
+            color={getCSSVariable('--blue-300')}
+            strokeWidth={5}
+          />
+        )
+        : (icon && (
+            <img
+              className={cls.tab__icon}
+              src={icon}
+              alt={title}
+            />
+          ))}
+      <p className={cls.tab__title}>
+        {title}
+      </p>
+      {!disableClose && (
+        <button
+          className={cls.tab__close}
+        >
+          <IoMdClose size={15} />
+        </button>
+      )}
     </button>
   );
 };

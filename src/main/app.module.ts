@@ -21,6 +21,7 @@ import { AppService } from './app.service'
         webPreferences: {
           devTools: isDev,
           contextIsolation: true,
+          webviewTag: true,
           preload: join(__dirname, '../preload/index.js'),
         },
       })

@@ -21,12 +21,14 @@ import {
 } from '@dnd-kit/core';
 import { horizontalListSortingStrategy, SortableContext, sortableKeyboardCoordinates } from '@dnd-kit/sortable';
 import { restrictToHorizontalAxis } from '@dnd-kit/modifiers';
+import { useNavigate } from '@tanstack/react-router';
 
 export const Tabs: React.FC = () => {
   const tabs = useUnit($tabs);
   const [activeTab, selectTab] = useUnit([$activeTab, tabSelected]);
   const closeTab = useUnit(tabClosed);
   const moveTabs = useUnit(tabsMoved);
+  const navigate = useNavigate();
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -57,10 +59,20 @@ export const Tabs: React.FC = () => {
               key={tab.id}
               title={tab.name}
               active={activeTab === tab.id}
-              onClick={() => selectTab(tab.id)}
+              onClick={() => {
+                selectTab(tab.id);
+                if (tab.url === '') {
+                  navigate({ to: '/' });
+                } else {
+                  navigate({ to: '/browse' });
+                }
+              }}
               onClose={() => {
                 closeTab(tab.id);
               }}
+              icon={tab.icon}
+              loading={tab.loading}
+              disableClose={tabs.length === 1}
             />
           ))}
           <AddTab />

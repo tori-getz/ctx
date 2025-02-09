@@ -2,6 +2,7 @@ import { join } from 'node:path'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 import { VitePluginDoubleshot } from 'vite-plugin-doubleshot'
+import { TanStackRouterVite } from '@tanstack/router-plugin/vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -24,6 +25,10 @@ export default defineConfig({
         },
       },
     }),
+    TanStackRouterVite({
+      generatedRouteTree: 'src/render/routeTree.gen.ts',
+      routesDirectory: 'src/render/pages'
+    })
   ],
   resolve: {
     alias: {

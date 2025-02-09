@@ -1,0 +1,1 @@
+export { getCSSVariable } from './get-css-variable';
