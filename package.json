@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "description": "ctx - browser based at web technologies",
+  "main": "dist/main/index.js",
   "scripts": {
     "dev": "rimraf dist && vite",
     "debug": "rimraf dist && vite -- --dsb-debug",
@@ -27,6 +28,7 @@
     "effector": "^23.3.0",
     "effector-logger": "^0.15.0",
     "effector-react": "^23.3.0",
+    "electron-custom-titlebar": "^4.0.2",
     "patronum": "^2.3.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

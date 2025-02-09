@@ -22,6 +22,9 @@ import {
 import { horizontalListSortingStrategy, SortableContext, sortableKeyboardCoordinates } from '@dnd-kit/sortable';
 import { restrictToHorizontalAxis } from '@dnd-kit/modifiers';
 import { useNavigate } from '@tanstack/react-router';
+import { WindowControls } from '~/widgets/window-controls';
+import { Platform, usePlatform } from '~/entities/platform';
+import clsx from 'clsx';
 
 export const Tabs: React.FC = () => {
   const tabs = useUnit($tabs);
@@ -29,6 +32,8 @@ export const Tabs: React.FC = () => {
   const closeTab = useUnit(tabClosed);
   const moveTabs = useUnit(tabsMoved);
   const navigate = useNavigate();
+
+  const platform = usePlatform();
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -52,7 +57,10 @@ export const Tabs: React.FC = () => {
         items={tabs}
         strategy={horizontalListSortingStrategy}
       >
-        <div className={cls.tabs}>
+        <div className={clsx(
+          cls.tabs,
+          { [cls.tabs__darwin]: platform === Platform.Darwin }
+        )}>
           {tabs.map((tab) => (
             <Tab
               id={tab.id}
@@ -78,6 +86,7 @@ export const Tabs: React.FC = () => {
           <AddTab />
         </div>
       </SortableContext>
+      <WindowControls />
     </DndContext>
   );
 };

@@ -1,0 +1,18 @@
+.controls
+  position: absolute
+  z-index: 99999
+  width: 150px
+  top: 0
+  right: 0
+  height: 40px
+  display: flex
+  -webkit-app-region: no-drag
+  pointer-events: all
+  &__button
+    flex: 1
+    border: none
+    -webkit-app-region: no-drag
+    transition: background-color .5s
+    cursor: pointer
+    &:hover
+      background-color: var(--grey-300)
